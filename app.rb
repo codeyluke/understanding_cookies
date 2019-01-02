@@ -1,10 +1,13 @@
 require 'sinatra'
+require 'sinatra/cookies'
+set :run, true
 
 get "/" do
-  @name = nil
+  @name = nil || cookies[:name] 
   erb :'home'
-end
+ end
 
 post "/" do
+  cookies[:name] = params["name"]
   redirect "/"
-end
+ end
